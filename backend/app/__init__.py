@@ -3,6 +3,7 @@ from flask import Flask
 from config import Config
 from .core.extensions import db, limiter
 from .services.reservation_services.v1 import bp_rsv_svc_v1
+from .core.error_handler import register_error_handlers
 
 def create_app():
     app = Flask(__name__)
@@ -16,5 +17,7 @@ def create_app():
         bp_rsv_svc_v1,
         url_prefix='/api/v1'
     )
+
+    register_error_handlers(app)
 
     return app
